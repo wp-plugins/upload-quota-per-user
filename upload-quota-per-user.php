@@ -44,6 +44,7 @@ function uqpu_deactivate() {
 }
 
 function populate_database() {
+	foreach (get_users() as $user) delete_user_meta($user->ID, 'uqpu_upload_space');
 	$attachments = get_posts(array('post_type' => 'attachment', 'posts_per_page' => -1, 'post_status' => 'any', 'post_parent' => null));
 	foreach ($attachments as $attachment) {
 		$size = filesize( get_attached_file($attachment->ID) );
