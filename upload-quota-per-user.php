@@ -30,7 +30,7 @@ register_activation_hook(UQPU_ABSPATH.'upload-quota-per-user.php', 'uqpu_activat
 register_deactivation_hook(UQPU_ABSPATH.'upload-quota-per-user.php', 'uqpu_deactivate');
 if ($uqpu_version != get_option('uqpu_version')) {
 	update_option('uqpu_version', $uqpu_version);
-	add_option('uqpu_disk_space', 50);
+	add_option('uqpu_single_file_size', 10);
 }
 
 function uqpu_activate() {
