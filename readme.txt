@@ -13,7 +13,7 @@ Limits the total space a user can use uploading files, except selected roles.
 
 == Description ==
 
-For sites that are more than single-user blogs, this simple plugin sets a limited upload quota for users, except selected roles and capabilities.
+For sites that are more than single-user blogs, this simple plugin limits the amount of space that users can use on their account, except selected roles and capabilities.
 
 = Features: =
 
