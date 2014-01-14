@@ -7,6 +7,8 @@ Author: Cristian Dinu-Tănase
 Author URI: http://www.cristiandt.ro
 */
 
+$uqpu_version='1.1';
+
 define('UQPU_FOLDER', basename(dirname(__FILE__)));
 define('UQPU_ABSPATH', trailingslashit(str_replace('\\', '/', WP_PLUGIN_DIR.'/'.UQPU_FOLDER)));
 define('UQPU_URLPATH', trailingslashit(plugins_url(UQPU_FOLDER)));
@@ -16,6 +18,7 @@ require_once(UQPU_ABSPATH."/admin.php");
 
 add_action('admin_init', 'uqpu_admin_settings');
 function uqpu_admin_settings(){
+	register_setting('uqpu-settings-group', 'uqpu_version');
 	register_setting('uqpu-settings-group', 'uqpu_disk_space');
 	register_setting('uqpu-settings-group', 'uqpu_single_file_size');
 	register_setting('uqpu-settings-group', 'uqpu_roles');
@@ -25,9 +28,14 @@ function uqpu_admin_settings(){
 load_plugin_textdomain('upload-quota-per-user', "", UQPU_FOLDER.'/lang');
 register_activation_hook(UQPU_ABSPATH.'upload-quota-per-user.php', 'uqpu_activate');
 register_deactivation_hook(UQPU_ABSPATH.'upload-quota-per-user.php', 'uqpu_deactivate');
+if ($uqpu_version != get_option('uqpu_version')) {
+	update_option('uqpu_version', $uqpu_version);
+	add_option('uqpu_disk_space', 50);
+}
 
 function uqpu_activate() {
 	populate_database();
+	add_option('uqpu_version', $uqpu_version);
 	add_option('uqpu_disk_space', 50);
 	add_option('uqpu_single_file_size', 10);
 	add_option('uqpu_roles', '');
@@ -35,6 +43,7 @@ function uqpu_activate() {
 }
 function uqpu_deactivate() {
 	empty_database();
+	delete_option('uqpu_version');
 	delete_option('uqpu_disk_space');
 	delete_option('uqpu_single_file_size');
 	delete_option('uqpu_roles');
