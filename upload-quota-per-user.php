@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Upload Quota per User
-Description: Limit file upload space for every user except selected roles.
+Description: Limits the total space a user can use uploading files and changes single file upload size.
 Version: 1.0
 Author: Cristian Dinu-Tănase
 Author URI: http://www.cristiandt.ro
@@ -17,6 +17,7 @@ require_once(UQPU_ABSPATH."/admin.php");
 add_action('admin_init', 'uqpu_admin_settings');
 function uqpu_admin_settings(){
 	register_setting('uqpu-settings-group', 'uqpu_disk_space');
+	register_setting('uqpu-settings-group', 'uqpu_single_file_size');
 	register_setting('uqpu-settings-group', 'uqpu_roles');
 	register_setting('uqpu-settings-group', 'uqpu_capabilities');
 }
@@ -27,13 +28,15 @@ register_deactivation_hook(UQPU_ABSPATH.'upload-quota-per-user.php', 'uqpu_deact
 
 function uqpu_activate() {
 	populate_database();
-	add_option('uqpu_disk_space', 5);
+	add_option('uqpu_disk_space', 50);
+	add_option('uqpu_single_file_size', 10);
 	add_option('uqpu_roles', '');
 	add_option('uqpu_capabilities', '');
 }
 function uqpu_deactivate() {
 	empty_database();
 	delete_option('uqpu_disk_space');
+	delete_option('uqpu_single_file_size');
 	delete_option('uqpu_roles');
 	delete_option('uqpu_capabilities');
 }
@@ -51,13 +54,16 @@ function empty_database() {
 	foreach ($attachments as $attachment) delete_user_meta( $attachment->post_author, 'uqpu_upload_space' );
 }
 
-$sizeLimit = 1024 * 1024 * get_option('uqpu_disk_space');
+$sizeLimit = 1024*1024*get_option('uqpu_disk_space');
 $passCapab=FALSE;
 if (get_option('uqpu_roles')) foreach (get_option('uqpu_roles') as $role) if(current_user_can($role)) $passCapab=TRUE;
 if (get_option('uqpu_capabilities')) {
 	$capabilities = explode(',', get_option('uqpu_capabilities'));
 	foreach ($capabilities as $capab) if(current_user_can($capab)) $passCapab=TRUE;
 }
+
+add_filter( 'upload_size_limit', 'uqpu_max_upload_size' );
+function uqpu_max_upload_size($size) { return 1024*1024*get_option('uqpu_single_file_size'); }
 
 function human_filesize($size,$unit="") {
   if( (!$unit && $size >= 1<<30) || $unit == "GB") return number_format($size/(1<<30),2)." GB";
@@ -108,7 +114,7 @@ function uqpu_at_delete($id) {
 	if ($uqpu_upload_space) update_user_meta( $user_id, 'uqpu_upload_space', $updateSize );
 }
 
-//------ Afiseaza Spatiul Utilizat  ------//
+//------ Show used space in Media Library  ------//
 add_filter( 'views_upload', 'uqpu_media_show_quota', 10, 1 );
 function uqpu_media_show_quota( $views ) {
 	global $sizeLimit;

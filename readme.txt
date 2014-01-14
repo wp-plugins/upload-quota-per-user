@@ -5,20 +5,22 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: attachment limit, 
 Requires at least: 2.8
 Tested up to: 3.8
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Limits the total space a user can use uploading files, except selected roles.
+Limits the total space a user can use uploading files and changes single file upload size.
 
 == Description ==
 
 For sites that are more than single-user blogs, this simple plugin limits the amount of space that users can use on their account, except selected roles and capabilities.
+Also, it can modify the maximum file upload size.
 
 = Features: =
 
 * Set the limit for total upload quota. (applies to all files: images, .rar, .pdf, etc)
 * If the upload quota exceeds, the file is prevented from uploading and the user gets an error message.
+* Set the maximum file upload size.
 * On the Media Library page, the user see the space it uses in size and percentage.
 * Certain User Roles or Capabilities can be added to not be affected by this restriction.
 
@@ -59,7 +61,13 @@ Yes, it does. It will not leave any trace in the database.
 = 1.0 =
 * Initial release
 
+= 1.1 =
+* Added option to edit single file upload size.
+
 == Upgrade Notice ==
 
 = 1.0 =
-* none
+none
+
+= 1.1 =
+Added option to edit single file upload size.
