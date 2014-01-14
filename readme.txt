@@ -15,12 +15,14 @@ Limits the total space a user can use uploading files, except selected roles.
 
 For sites that are more than single-user blogs, this simple plugin sets a limited upload quota for users, except selected roles and capabilities.
 
-Features:
+= Features: =
 
 * Set the limit for total upload quota. (applies to all files: images, .rar, .pdf, etc)
 * If the upload quota exceeds, the file is prevented from uploading and the user gets an error message.
 * On the Media Library page, the user see the space it uses in size and percentage.
 * Certain User Roles or Capabilities can be added to not be affected by this restriction.
+
+If you have any idea that can improve this plugin, or some bug, don't hesitate to write me on the support tab.
 
 == Installation ==
 
