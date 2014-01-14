@@ -9,31 +9,42 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Limit file upload space for every user except selected roles.
+Limits the total space a user can use uploading files, except selected roles.
 
 == Description ==
 
-For sites that are more than single-user blogs, this simple plugin limits the space that users use on uploading files, except selected roles and capabilities.
+For sites that are more than single-user blogs, this simple plugin sets a limited upload quota for users, except selected roles and capabilities.
 
 Features:
 
-* Set your upload limit quota for uploaded files (images, .rar, .pdf, etc)
-* Once the user quota reaches, the file is prevented to upload and the user gets an error message.
+* Set the limit for total upload quota. (applies to all files: images, .rar, .pdf, etc)
+* If the upload quota exceeds, the file is prevented from uploading and the user gets an error message.
 * On the Media Library page, the user see the space it uses in size and percentage.
 * Certain User Roles or Capabilities can be added to not be affected by this restriction.
-
 
 == Installation ==
 
 1. Download, Install, and Activate the Upload Quota per User plugin.
 2. On the Media menu, select Upload Quota and choose your settings.
-3. You are finished setting the plugin, now your users have restrictions in file upload size.
+3. You are finished setting the plugin, now your users have upload quota restriction.
 
 
 == Frequently Asked Questions ==
+
+= When activating the plugin how does fill the database?
+
+At plugin activation, it searches for every attachment, detects its size, and adds to its author.
+
+= If an Admin deletes another user's media file, does the quota apply?
+
+Yes, whenever an attachment is deleted by the owner or administrator, the author of that attachment is affected.
+
 = Where is this information stored?
-The Settings on WP Settings API and the space quota in the user_meta.
+
+The settings on WP Settings API and the upload quota in the user_meta.
+
 = Does this plugin delete all the data at deactivation?
+
 Yes, it does. It will not leave any trace in the database.
 
 == Screenshots ==
