@@ -2,7 +2,7 @@
 /*
 Plugin Name: Upload Quota per User
 Description: Limits the total space a user can use uploading files and changes single file upload size.
-Version: 1.0
+Version: 1.1
 Author: Cristian Dinu-Tănase
 Author URI: http://www.cristiandt.ro
 */
