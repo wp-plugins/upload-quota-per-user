@@ -7,6 +7,8 @@ Author: Cristian Dinu-Tănase
 Author URI: http://www.cristiandt.ro
 */
 
+$uqpu_version='1.0';
+
 define('UQPU_FOLDER', basename(dirname(__FILE__)));
 define('UQPU_ABSPATH', trailingslashit(str_replace('\\', '/', WP_PLUGIN_DIR.'/'.UQPU_FOLDER)));
 define('UQPU_URLPATH', trailingslashit(plugins_url(UQPU_FOLDER)));
@@ -16,6 +18,7 @@ require_once(UQPU_ABSPATH."/admin.php");
 
 add_action('admin_init', 'uqpu_admin_settings');
 function uqpu_admin_settings(){
+	register_setting('uqpu-settings-group', 'uqpu_version');
 	register_setting('uqpu-settings-group', 'uqpu_disk_space');
 	register_setting('uqpu-settings-group', 'uqpu_roles');
 	register_setting('uqpu-settings-group', 'uqpu_capabilities');
@@ -27,12 +30,14 @@ register_deactivation_hook(UQPU_ABSPATH.'upload-quota-per-user.php', 'uqpu_deact
 
 function uqpu_activate() {
 	populate_database();
+	add_option('uqpu_version', $uqpu_version);
 	add_option('uqpu_disk_space', 5);
 	add_option('uqpu_roles', '');
 	add_option('uqpu_capabilities', '');
 }
 function uqpu_deactivate() {
 	empty_database();
+	delete_option('uqpu_version');
 	delete_option('uqpu_disk_space');
 	delete_option('uqpu_roles');
 	delete_option('uqpu_capabilities');
