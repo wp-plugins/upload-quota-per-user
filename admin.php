@@ -25,12 +25,6 @@ function upload_quota_per_user_settings() {
 							<?php _e('Disk Space Limit', 'upload-quota-per-user'); echo ' (MB)'; ?>
 						</label>
 					</fieldset>
-					<fieldset>
-						<label for="uqpu_single_file_size">
-							<input type="number" name="uqpu_single_file_size" value="<?php echo get_option('uqpu_single_file_size'); ?>"/>
-							<?php _e('Single File Size Limit', 'upload-quota-per-user'); echo ' (MB)'; ?>
-						</label>
-					</fieldset>
 				</td>
 			</tr>
 			<tr valign="top">
