@@ -63,7 +63,7 @@ if (get_option('uqpu_capabilities')) {
 }
 
 add_filter( 'upload_size_limit', 'uqpu_max_upload_size' );
-function uqpu_max_upload_size($size) { return 1024*1024*get_option('uqpu_single_file_size'); }
+function uqpu_max_upload_size($size) { if(get_option('uqpu_single_file_size')) return 1024*1024*get_option('uqpu_single_file_size'); else return 1024*1024*64; }
 
 function human_filesize($size,$unit="") {
   if( (!$unit && $size >= 1<<30) || $unit == "GB") return number_format($size/(1<<30),2)." GB";
