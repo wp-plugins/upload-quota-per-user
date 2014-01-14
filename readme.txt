@@ -28,22 +28,21 @@ Features:
 2. On the Media menu, select Upload Quota and choose your settings.
 3. You are finished setting the plugin, now your users have upload quota restriction.
 
-
 == Frequently Asked Questions ==
 
-= When activating the plugin how does fill the database?
+= When activating the plugin how does fill the database? =
 
 At plugin activation, it searches for every attachment, detects its size, and adds to its author.
 
-= If an Admin deletes another user's media file, does the quota apply?
+= If an Admin deletes another user's media file, does the quota apply? =
 
 Yes, whenever an attachment is deleted by the owner or administrator, the author of that attachment is affected.
 
-= Where is this information stored?
+= Where is this information stored? =
 
 The settings on WP Settings API and the upload quota in the user_meta.
 
-= Does this plugin delete all the data at deactivation?
+= Does this plugin delete all the data at deactivation? =
 
 Yes, it does. It will not leave any trace in the database.
 
