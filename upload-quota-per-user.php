@@ -2,8 +2,8 @@
 /*
 Plugin Name: Upload Quota per User
 Description: Limits the total space a user can use uploading files and changes single file upload size.
-Version: 1.1
-Author: Cristian Dinu-Tănase
+Version: 1.2
+Author: Cristian Dinu-Tănase, Daniyal Ahmed
 Author URI: http://www.cristiandt.ro
 */
 
@@ -115,7 +115,8 @@ function uqpu_after_uploading( $args ) {
 //------ At Attachment delete  ------//
 add_action('delete_attachment', 'uqpu_at_delete');
 function uqpu_at_delete($id) {
-	$user_id = get_post($id, ARRAY_A)['post_author'];
+	$user_id = get_post($id, ARRAY_A);
+	$user_id = $user_id['post_author'];
 	$size = filesize( get_attached_file($id) );
 	$uqpu_upload_space = get_user_meta( $user_id, 'uqpu_upload_space', $single = true );
 	$updateSize = $uqpu_upload_space - $size;
