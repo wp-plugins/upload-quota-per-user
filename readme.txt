@@ -1,6 +1,6 @@
 === Upload Quota per User ===
 
-Contributors: cristian.sarov
+Contributors: cristian.sarov,daniyalahmedk
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SF4HKR2UHFZXN
 Tags: attachment limit
 Requires at least: 2.8
